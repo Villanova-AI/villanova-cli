@@ -270,7 +270,10 @@ QS.RUN-ENT-CHECK-ENV() {
 # determines the structure and conventions of the entando-releases repository
 QS.DETERMINE_FILE_STRUCTURE() {
   local BASEREL="${ENTANDO_RELEASE/-*/}"
-  if check_ver_ge "$BASEREL" "7.0.0"; then
+  # Villanova versions (0.x.x) use v7 structure
+  if [[ "$BASEREL" =~ ^v?0\. ]]; then
+    ENTANDO_RELEASES_FILES_STRUCTURE="v7"
+  elif check_ver_ge "$BASEREL" "7.0.0"; then
     ENTANDO_RELEASES_FILES_STRUCTURE="v7"
   elif check_ver_ge "$BASEREL" "6.5.0"; then
     ENTANDO_RELEASES_FILES_STRUCTURE="v7"
@@ -647,7 +650,7 @@ QS.VM.SEND-NECESSARY-FILES-TO-VM() {
 QS.VM.ON-VM.INSTALL-ENT() {
   _log_i "> Installing Ent on the VM"
   multipass exec "$ENTANDO_VM_NAME" -- bash -c "
-    bash <(curl \"https://raw.githubusercontent.com/entando/entando-cli/$ENTANDO_CLI_VERSION/auto-install\") \
+    bash <(curl \"https://raw.githubusercontent.com/Villanova-AI/villanova-cli/$ENTANDO_CLI_VERSION/auto-install\") \
       --release=\"$ENTANDO_RELEASE\" --cli-version=\"$ENTANDO_CLI_VERSION\"
     "
 }
@@ -730,11 +733,11 @@ QS.VM.ON-VM.START-QUICKSTART() {
 
 
 QS.CHECKOUT-RELEASE() {
-  ENTANDO_RELEASE_DIST_DIR="$ENTANDO_RELEASE_BASE_DIR/entando-releases/dist"
+  ENTANDO_RELEASE_DIST_DIR="$ENTANDO_RELEASE_BASE_DIR/villanova-releases/dist"
   (
     cd "$ENTANDO_RELEASE_BASE_DIR"
-    git clone "https://github.com/entando/entando-releases" || _FATAL "Unable to download the release information"
-    cd "entando-releases" || _FATAL "Unable to download the release information"
+    git clone "https://github.com/Villanova-AI/villanova-releases" || _FATAL "Unable to download the release information"
+    cd "villanova-releases" || _FATAL "Unable to download the release information"
     git checkout "$ENTANDO_RELEASE" || _FATAL "Unable to find the release \"$ENTANDO_RELEASE\""
   ) || exit "$?"
 }

@@ -48,6 +48,9 @@ save_cfg_value() {
   shift
   local config_file="$CFG_FILE"; [ -n "$1" ] && { config_file="$1"; shift; }
 
+  # If no config file is set (no active profile), skip saving
+  [ -z "$config_file" ] && return 0
+
   if [ "$(echo "$value" | wc -l)" -gt 1 ]; then
     _FATAL "save_cfg_value: multiline values are not supported (variable: \"$name\")"
   fi
@@ -346,7 +349,7 @@ index_of_arg() {
   [ -n "$1" ] && return $i || return 255
 }
 
-# prints the Entando banner
+# prints the Villanova banner
 #
 # shellcheck disable=SC2059
 print_entando_banner() {
@@ -355,18 +358,13 @@ print_entando_banner() {
     B() { echo '\033[0;34m'; }
     # shellcheck disable=2028
     W() { echo '\033[0;39m'; }
-    N=''
     printf "\n"
-    printf " $(B)████████╗$(W)\n"
-    printf " $(B)██╔═════╝$(W)\n"
-    printf " $(B)██║$(W) $(B)███████╗$(W)  ██    █  ███████    ███    ██    █  ██████    █████ \n"
-    printf " $(B)╚═╝${N} $(B)█╔═════╝$(W)  █ █   █     █      █   █   █ █   █  █     █  █     █\n"
-    printf " ${N}${N}    $(B)█████╗  $(W)  █  █  █     █     █     █  █  █  █  █     █  █     █\n"
-    printf " ${N}${N}    $(B)█╔═══╝  $(W)  █   █ █     █     ███████  █   █ █  █     █  █     █\n"
-    printf " ${N}${N}    $(B)███████╗$(W)  █    ██     █     █     █  █    ██  ██████    █████    $(B)██╗$(W)\n"
-    printf " ${N}${N}    $(B)╚══════╝$(W)                                                         $(B)██║$(W)\n"
-    printf " ${N}${N}${N}${N}                                                               $(B)████████║$(W)\n"
-    printf " ${N}${N}${N}${N}                                                               $(B)╚═══════╝$(W)\n"
+    printf " $(B)╦  ╦╦╦  ╦  ╔═╗╔╗╔╔═╗╦  ╦╔═╗$(W)\n"
+    printf " $(B)╚╗╔╝║║  ║  ╠═╣║║║║ ║╚╗╔╝╠═╣$(W)\n"
+    printf " $(B) ╚╝ ╩╩═╝╩═╝╩ ╩╝╚╝╚═╝ ╚╝ ╩ ╩$(W)\n"
+    printf "\n"
+    printf "  $(W)Powered by Villanova Platform$(W)\n"
+    printf "\n"
   } > /dev/stderr
 }
 
