@@ -1,4 +1,4 @@
-# Entando CLI
+# Villanova CLI
 
 # Requirements:
 
@@ -28,26 +28,32 @@ ent check-env {mode}
 
 ## On the fly:
 
-```
-curl https://<ent-url>/auto-install | ENTANDO_RELEASE={entando-release-tag} bash
-```
-or
-```
-bash <(curl "https://<ent-url>/entando/entando-cli/develop/auto-install") --release "{entando-release-tag}" 
-[--cli-version "{entando-release-tag}"]
+**Quick Installation (recommended):**
+```bash
+# Method 1: Using hr/auto script with environment variable
+curl -sL "https://raw.githubusercontent.com/Villanova-AI/villanova-cli/v0.9.0/hr/auto" | ENTANDO_RELEASE="v0.9.0" bash
+
+# Method 2: Using auto-install directly (note the = signs!)
+bash <(curl -L "https://raw.githubusercontent.com/Villanova-AI/villanova-cli/v0.9.0/auto-install") \
+  --release="v0.9.0" --cli-version="v0.9.0"
 ```
 
+**Important:** When using command-line parameters, use equals signs (e.g., `--release="v0.9.0"`), not spaces.
 
-please note that the {entando-release-tag} is the tag of the Entando release under:
+**Note:** The `{villanova-release-tag}` refers to release tags available at:
+- https://github.com/Villanova-AI/villanova-releases/releases
 
-- https://github.com/entando/entando-releases/
+Current stable version: **v0.9.0**
 
 
 ## Manual download:
 
-_clone/download the project and then:_
-```
-<ent-path>/auto-install [entando-release-tag]
+_Clone the repository and run the installer:_
+```bash
+git clone https://github.com/Villanova-AI/villanova-cli.git
+cd villanova-cli
+git checkout v0.9.0
+./auto-install --release="v0.9.0" --cli-version="v0.9.0"
 ```
 
 # Help

@@ -115,7 +115,7 @@ ENT_RUNNER_DC7C420E09B4492D() {
   fi
 
   local C_QUICKSTART_DEFAULT_RELEASE="quickstart"
-  local ENTANDO_RELEASES_REPO_URL="https://github.com/entando/entando-releases.git"
+  local ENTANDO_RELEASES_REPO_URL="https://github.com/Villanova-AI/villanova-releases.git"
   local AUTO_ACTIVATION=true
   local CURR_DIR=false
   local UPDATE_CLI=0
@@ -202,7 +202,7 @@ ENT_RUNNER_DC7C420E09B4492D() {
 
     # RELEASE
     echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-    echo "> Downloading the ENTANDO RELEASE $ENTANDO_RELEASE"
+    echo "> Downloading the VILLANOVA RELEASE $ENTANDO_RELEASE"
     echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 
     mkdir -p "$ENTANDO_DIR/$ENT_DIR"
@@ -220,11 +220,11 @@ ENT_RUNNER_DC7C420E09B4492D() {
   (
     # CLI
     echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-    echo "> Downloading the ENTANDO CLI $ENTANDO_CLI_VERSION"
+    echo "> Downloading the VILLANOVA CLI $ENTANDO_CLI_VERSION"
     echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     cd "$ENTANDO_RELEASE"
     mkdir -p "./cli"
-    ent_clone_repo_DC7C420E09B4492D "https://github.com/entando/entando-cli" \
+    ent_clone_repo_DC7C420E09B4492D "https://github.com/Villanova-AI/villanova-cli" \
       "$ENTANDO_CLI_VERSION" "cli/$ENTANDO_CLI_VERSION" "version" $UPDATE_CLI || exit "$?"
 
     cd "cli/$ENTANDO_CLI_VERSION"
@@ -320,7 +320,7 @@ ENT_RUNNER_DC7C420E09B4492D() {
   )
 
   echo "═════════════════════════════════════════════════════════════════════════════"
-  echo "THE ENTANDO-CLI (ENT) HAS BEEN INSTALLED."
+  echo "THE VILLANOVA-CLI (ENT) HAS BEEN INSTALLED."
   echo ""
   $AUTO_ACTIVATION && $SOURCED && {
     # shellcheck disable=SC1090
