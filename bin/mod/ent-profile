@@ -165,7 +165,7 @@ setup_curr_profile() {
   args_or_ask -h "$HH" ENTANDO_APPNAME "--appname/appname_param/:auto/%sp EntandoApp name" "$@" && {
     save_cfg_value ENTANDO_APPNAME "$ENTANDO_APPNAME"
   }
-  args_or_ask -h "$HH" ENTANDO_NAMESPACE "--namespace/ext_ic_id/$PROFILE/%sp default namespace" "$@" && {
+  args_or_ask -h "$HH" ENTANDO_NAMESPACE "--namespace/ext_ic_id//%sp default namespace" "$@" && {
     save_cfg_value ENTANDO_NAMESPACE "$ENTANDO_NAMESPACE"
   }
   [ -n "$HH" ] && exit 0
@@ -430,7 +430,7 @@ assert_appname_param() {
 parse_basic_profile_args() {
   local from="$1"
   shift
-  args_or_ask ${HH:+"$HH"} -a ENTANDO_NAMESPACE "$((from + 0))/ext_ic_id/$PROFILE/%sp default namespace" "$@"
+  args_or_ask ${HH:+"$HH"} -a ENTANDO_NAMESPACE "$((from + 0))/ext_ic_id//%sp default namespace" "$@"
   args_or_ask ${HH:+"$HH"} -a ENTANDO_APPNAME "$((from + 1))/appname_param/:auto/%sp EntandoApp name" "$@"
 }
 

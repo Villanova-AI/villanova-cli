@@ -5,7 +5,7 @@
 # This script can be hosted at get.villanova.ai or similar URL
 #
 # Usage:
-#   curl -sL "https://get.villanova.ai" | ENTANDO_RELEASE="v0.9.0" bash
+#   curl -sL "https://get.villanova.ai" | VILLANOVA_RELEASE="v0.9.0" bash
 #   or
 #   bash <(curl -sL "https://get.villanova.ai") --release="v0.9.0"
 #

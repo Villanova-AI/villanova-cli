@@ -100,7 +100,7 @@ QS.PARSE_ARGS() {
 
   #-----------------------------------------------------------------------------------------------------------------------
 
-  args_or_ask -h "$HH" -n -a "ENTANDO_NAMESPACE" "1/ext_id//The namespace" "$@"
+  args_or_ask -h "$HH" -n -a "ENTANDO_NAMESPACE" "1/ext_id/villanova/The namespace" "$@"
   args_or_ask -h "$HH" -n -a "ENTANDO_APPNAME" "2/ext_id//The application name" "$@"
   args_or_ask -h "$HH" -n -p "ENTANDO_RELEASE" \
     "--release//$C_QUICKSTART_DEFAULT_RELEASE/the version tag of the release" "$@"
@@ -241,8 +241,8 @@ QS.CREATE-QS-PROFILE() {
   
   ent-profile-delete "qs-localhost" --yes
   ent-profile-new "qs-localhost" \
-    "$ENTANDO_APPNAME" \
     "$ENTANDO_NAMESPACE" \
+    "$ENTANDO_APPNAME" \
     --auto-use=false \
   ;
   sourced-ent-profile-use "qs-localhost"
@@ -477,16 +477,18 @@ QS.MANIFEST.v7.SET-PLACEHOLDERS() {
   local MANIFEST_TEMPLATE_FILE="$1"
   local APPVER="7.0"
   local REPLICA="1"
-  local IMGTYPE="eap"
+  local IMGTYPE="tomcat"
   local DB="${OVERRIDE_DB_TYPE:-"embedded"}"
+  local INGRESS_PATH="/villanova-de-app"
   local ENTANDO_HOSTNAME="${SINGLE_HOSTNAME}"
   [ -z "$ENTANDO_HOSTNAME" ] || [ "$ENTANDO_HOSTNAME" = "~" ] && ENTANDO_HOSTNAME="$ENTANDO_APPNAME.$FQADDR"
-  
+
   # shellcheck disable=SC2002
   cat "$ENTANDO_RELEASE_DIST_DIR/$MANIFEST_TEMPLATE_FILE" \
     | _perl_sed "s/{{ENTANDO_NAMESPACE}}/$ENTANDO_NAMESPACE/" \
     | _perl_sed "s/{{ENTANDO_APP_NAME}}/$ENTANDO_APPNAME/" \
     | _perl_sed "s/{{ENTANDO_HOSTNAME}}/$ENTANDO_HOSTNAME/" \
+    | _perl_sed "s|{{ENTANDO_INGRESS_PATH}}|$INGRESS_PATH|" \
     | _perl_sed "s/{{ENTANDO_APP_IMAGE_TYPE}}/$IMGTYPE/" \
     | _perl_sed "s/{{ENTANDO_APP_REPLICAS}}/$REPLICA/" \
     | _perl_sed "s/{{ENTANDO_DBMS}}/$DB/" \
@@ -612,8 +614,8 @@ QS.VM.CREATE-QS-PROFILE() {
     ent-profile-delete "qs-$ENTANDO_VM_NAME" --yes
     ent-profile-delete "qs-$ENTANDO_VM_NAME" --yes
     ent-profile-new "qs-$ENTANDO_VM_NAME" \
-      "$ENTANDO_APPNAME" \
       "$ENTANDO_NAMESPACE" \
+      "$ENTANDO_APPNAME" \
       --auto-use=false \
     ;
     # shellcheck disable=SC1091
