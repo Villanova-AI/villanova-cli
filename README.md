@@ -31,7 +31,7 @@ ent check-env {mode}
 **Quick Installation (recommended):**
 ```bash
 # Method 1: Using hr/auto script with environment variable
-curl -sL "https://raw.githubusercontent.com/Villanova-AI/villanova-cli/v0.9.0/hr/auto" | ENTANDO_RELEASE="v0.9.0" bash
+curl -sL "https://raw.githubusercontent.com/Villanova-AI/villanova-cli/v0.9.0/hr/auto" | VILLANOVA_RELEASE="v0.9.0" bash
 
 # Method 2: Using auto-install directly (note the = signs!)
 bash <(curl -L "https://raw.githubusercontent.com/Villanova-AI/villanova-cli/v0.9.0/auto-install") \
